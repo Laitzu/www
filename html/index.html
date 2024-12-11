@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+</head>
+
+
+<body>
+<h1>This page is only for debugging</h1>
+<p id="post-message">No POST request received yet.</p>
+
+<script>
+    // Function that fetches messages that have already been sent to the server
+    function fetchPostMessage() {
+        fetch('/get_message')
+            .then(response => response.json())
+            .then(data => {
+                // Update list of messages
+                document.getElementById('post-message').innerText = data.message || 'No POST request received yet.';
+            })
+    }
+
+
+    // Fetch messages on page load
+    fetchPostMessage();
+
+    // After this fetch messages every 5 seconds
+    setInterval(fetchPostMessage, 5000);
+</script>
+
+</body>
